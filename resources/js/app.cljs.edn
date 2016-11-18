@@ -1,0 +1,3 @@
+{:require  [todo-list.app]
+ :init-fns [todo-list.app/init]
+ :compiler-options {:asset-path "js/app.out"}}
