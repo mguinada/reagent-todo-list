@@ -22,7 +22,7 @@
   "Root component"
   []
   [:div
-   [:ul
+   [:ul.todo-list
     (for [t (:tasks @state)]
       [:li
        [task t]])]])
