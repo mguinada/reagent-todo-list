@@ -1,18 +1,22 @@
 (ns todo-list.app
-  (:require [reagent.core :as reagent :refer [atom]]))
+  (:require [reagent.core :as r]))
 
-(defn some-component []
-  [:div
-   [:h3 "I am a component!"]
-   [:p.someclass
-    "I have " [:strong "bold"]
-    [:span {:style {:color "red"}} " and red"]
-    " text."]])
+(defn task
+  "Renders a TODO item"
+  []
+  [:div.row.todo
+   [:div.large-12.columns
+    [:p [:strong "Task mockup "]
+     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."]
+    [:ul.inline-list
+     [:li [:a {:href "javascript:void(0);"} "Mark as done"]]]]])
 
-(defn calling-component []
-  [:div "Parent component"
-   [some-component]])
+(defn root-component
+  "Container all components"
+  []
+  [task])
 
-(defn init []
-  (reagent/render-component [calling-component]
-                            (.getElementById js/document "container")))
+(defn init
+  "Entry point"
+  []
+  (r/render-component [root-component] (.getElementById js/document "container")))

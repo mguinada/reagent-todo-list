@@ -23,10 +23,7 @@
  '[deraen.boot-sass    :refer [sass]])
 
 (deftask build []
-  (comp (speak)
-        
-        (cljs)
-        
+  (comp (cljs)
         (garden :styles-var 'todo-list.styles/screen
 :output-to "css/garden.css")
         (sass)))
@@ -40,9 +37,9 @@
 
 (deftask production []
   (task-options! cljs {:optimizations :advanced}
-                      garden {:pretty-print false}
-                      sass   {:output-style :compressed})
-  identity)
+                 garden {:pretty-print false}
+                 sass   {:output-style :compressed}
+                 identity))
 
 (deftask development []
   (task-options! cljs {:optimizations :none :source-map true}
@@ -54,5 +51,3 @@
   []
   (comp (development)
         (run)))
-
-
