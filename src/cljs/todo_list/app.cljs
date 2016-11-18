@@ -4,26 +4,30 @@
 
 (def state
   (r/atom
-   {:task
+   {:tasks
     [(m/task "Review presentation slides")
      (m/task "Check if current slideware does not exceed presentation timebox")]}))
 
 (defn task
   "Renders a TODO item"
-  []
+  [task]
   [:div.row.todo
    [:div.large-12.columns
-    [:p [:strong "Task mockup "]
-     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."]
+    [:p (:description task)]
     [:ul.inline-list
-     [:li [:a {:href "javascript:void(0);"} "Mark as done"]]]]])
+     [:li [:a {:href "javascript:void(0);"} "Mark as done"]]
+     [:li [:a {:href "javascript:void(0);"} "Delete"]]]]])
 
-(defn root-component
-  "Container all components"
+(defn root
+  "Root component"
   []
-  [task])
+  [:div
+   [:ul
+    (for [t (:tasks @state)]
+      [:li
+       [task t]])]])
 
 (defn init
   "Entry point"
   []
-  (r/render-component [root-component] (.getElementById js/document "container")))
+  (r/render-component [root] (.getElementById js/document "container")))
