@@ -1,5 +1,12 @@
 (ns todo-list.app
-  (:require [reagent.core :as r]))
+  (:require [reagent.core :as r]
+            [todo-list.model :as m]))
+
+(def state
+  (r/atom
+   {:task
+    [(m/task "Review presentation slides")
+     (m/task "Check if current slideware does not exceed presentation timebox")]}))
 
 (defn task
   "Renders a TODO item"
