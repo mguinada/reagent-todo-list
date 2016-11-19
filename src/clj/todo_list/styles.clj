@@ -2,18 +2,37 @@
   (:require [garden.def :refer [defrule defstyles]]
             [garden.stylesheet :refer [rule]]))
 
-(defstyles todo
-  (let [div (rule :div.todo) p (rule :div.todo :p)]
-    (div {:margin-bottom "5px"})
-    (p {:font-size "32px" :margin-bottom "2px"})))
+;;TODO: Move the todo-list.app
 
 (defstyles todo-list
-  (let [task-list (rule :ul.todo-list)]
-    (task-list {:list-style :none})))
+  [:ul.todo-list {:list-style :none}])
+
+(defstyles todo-box
+  [:div.todo
+   {:font-size "32px"
+    :margin-bottom "15px"
+    :margin-right "0px"
+    :border-radius "15px"
+    :border "1px solid #d1d3d6"}
+   [:ul.inline-list
+    {:margin-bottom "7px"}]
+   [:a
+    {:font-size "12px"
+     :color "#d1d3d6"
+     :padding "2px 4px 2px 4px"}
+    [:&:hover
+     {:background-color :black
+      :color "#d1d3d6"
+      :border-radius "5px"}]]
+   [:p
+    {:margin "5px 0 2px 0"
+     :font-size "32px"}]])
+
+(def font {:font-family "Helvetica Neue" :font-size "16px" :line-height 1.5})
 
 (defstyles screen
-  (let [body (rule :body)]
-    (body
-     {:font-family "Helvetica Neue" :font-size "16px" :line-height 1.5}
-     todo
-     todo-list)))
+  (let [container (rule :div#container)]
+    (container
+     font
+     todo-list
+     todo-box)))

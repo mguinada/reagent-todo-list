@@ -9,7 +9,7 @@
                  [org.clojure/tools.nrepl   "0.2.12"     :scope "test"]
                  [weasel                    "0.7.0"      :scope "test"]
                  [org.clojure/clojurescript "1.7.228"]
-                 [reagent "0.5.0"]
+                 [reagent "0.6.0"]
                  [org.martinklepsch/boot-garden "1.2.5-3" :scope "test"]
                  [deraen/boot-sass  "0.2.1" :scope "test"]
                  [org.slf4j/slf4j-nop  "1.7.13" :scope "test"]])
@@ -24,8 +24,7 @@
 
 (deftask build []
   (comp (cljs)
-        (garden :styles-var 'todo-list.styles/screen
-:output-to "css/garden.css")
+        (garden :styles-var 'todo-list.styles/screen :output-to "css/garden.css")
         (sass)))
 
 (deftask run []

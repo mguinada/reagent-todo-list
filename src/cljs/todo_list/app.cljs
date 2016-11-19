@@ -15,8 +15,7 @@
    [:div.large-12.columns
     [:p (:description task)]
     [:ul.inline-list
-     [:li [:a {:href "javascript:void(0);"} "Mark as done"]]
-     [:li [:a {:href "javascript:void(0);"} "Delete"]]]]])
+     [:li [:a {:href "javascript:void(0);"} "Mark as done"]]]]])
 
 (defn root
   "Root component"
@@ -24,8 +23,7 @@
   [:div
    [:ul.todo-list
     (for [t (:tasks @state)]
-      [:li
-       [task t]])]])
+      [:li [task t]])]])
 
 (defn init
   "Entry point"
