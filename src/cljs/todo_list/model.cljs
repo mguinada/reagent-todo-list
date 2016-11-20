@@ -9,3 +9,8 @@
   "Mark task as done"
   [task]
   (assoc task :done true))
+
+(defn done?
+  "Is the task done?"
+  [task]
+  (:done task))

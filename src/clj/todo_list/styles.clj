@@ -2,10 +2,17 @@
   (:require [garden.def :refer [defrule defstyles]]
             [garden.stylesheet :refer [rule]]))
 
-;;TODO: Move the todo-list.app
+(def grey "#d1d3d6")
 
 (defstyles todo-list
   [:ul.todo-list {:list-style :none}])
+
+(defstyles task-input
+  [:div.task-input
+   [:input
+    {:height "50px"
+     :font-size "20px"
+     :border-radius "10px"}]])
 
 (defstyles todo-box
   [:div.todo
@@ -13,16 +20,16 @@
     :margin-bottom "15px"
     :margin-right "0px"
     :border-radius "15px"
-    :border "1px solid #d1d3d6"}
+    :border (str "1px solid " grey)}
    [:ul.inline-list
     {:margin-bottom "7px"}]
    [:a
     {:font-size "12px"
-     :color "#d1d3d6"
+     :color grey
      :padding "2px 4px 2px 4px"}
     [:&:hover
      {:background-color :black
-      :color "#d1d3d6"
+      :color grey
       :border-radius "5px"}]]
    [:p
     {:margin "5px 0 2px 0"
@@ -34,5 +41,6 @@
   (let [container (rule :div#container)]
     (container
      font
+     task-input
      todo-list
      todo-box)))
