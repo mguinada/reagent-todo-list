@@ -33,7 +33,11 @@
       :border-radius "5px"}]]
    [:p
     {:margin "5px 0 2px 0"
-     :font-size "32px"}]])
+     :font-size "32px"}
+    [:&.done
+     {:text-decoration "line-through"
+      :font-style "italic"
+      :color grey}]]])
 
 (def font {:font-family "Helvetica Neue" :font-size "16px" :line-height 1.5})
 

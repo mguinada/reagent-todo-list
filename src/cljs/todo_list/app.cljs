@@ -4,13 +4,18 @@
 
 (def state
   (r/atom
-   {:tasks
-    [(m/task "Review presentation slides")
-     (m/task "Check if current slideware does not exceed presentation timebox")]}))
+   [(m/task "Review presentation slides")
+    (m/task "Check if current slideware does not exceed presentation timebox")
+    (m/task "Drop least relevant slides if slideware is too big")]))
 
 (defn add-task
+  "Add a task to the end of the list"
   [task]
-  (swap! state update-in [:tasks] conj task))
+  (swap! state conj task))
+
+(defn update-task
+  [original-task updated-task]
+  (swap! state (partial replace {original-task updated-task})))
 
 (defn task
   "Renders a TODO item"
@@ -18,9 +23,11 @@
   [:div.row.todo
    [:div.large-12.columns
     [:p {:class (if (m/done? task) "done" "undone")} (:description task)]
-    [:ul.inline-list
-     [:li
-      [:a (str "Mark as " (if (m/done? task) "undone" "done"))]]]]])
+    (if-not (m/done? task)
+      [:ul.inline-list
+       [:li
+        [:a {:on-click #(update-task task (m/done task))}
+         "Mark as done"]]])]])
 
 (defn task-input
   "Input new tasks"
@@ -43,7 +50,7 @@
   [:div
    [task-input]
    [:ul.todo-list
-    (for [t (:tasks @state)]
+    (for [t (sort-by :done @state)]
       ^{:key t} [:li [task t]])]])
 
 (defn init

@@ -1,9 +1,10 @@
-(ns todo-list.model)
+(ns todo-list.model
+  (:require [clojure.string :as string :refer [capitalize]]))
 
 (defn task
   "Task constructor"
   [description]
-  {:description description :created-at (.getTime (js/Date.)) :done false})
+  {:description (capitalize description) :created-at (.getTime (js/Date.)) :done false})
 
 (defn done
   "Mark task as done"
